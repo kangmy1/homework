@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	table {
+         border: solid 3px black;
+         background-color: silver; 
+         height : 500px;
+         width : 350px;
+         text-align:center;
+         margin-left : 5%;
+      	 margin-right : 5%;
+	}
+    #total {
+      margin-top : 5%;
+      margin-bottom : 5%;
+      height : 90%;
+      width : 95%;
+    }
+</style>
+
+<script type = 'text/javascript'>
+
+    var flag = false; // 0이 있는 상태, 5/20,  20:48
+	var total = "";   // 결과 값
+    var display = ""; // 계산과정
+
+    function add(num){ //0이뜨는 현상 수정 필요! -> 5/22 17:39 
+    //form 태그 name의, value값 으로 값 받아오는 방식으로 변경!
+      	if(flag == false) {
+        	kalt.total.value = "";
+            kalt.display.value = "";
+            flag = true;
+        }
+        
+        if(kalt.display.value.length < 19) { // 자릿수 제한 - 19 
+            kalt.display.value = kalt.display.value + num;
+        }
+    
+    }
+
+    function merge(){
+        if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+           var display = document.getElementById('display');
+            total = eval(kalt.display.value); // 식을 계산하고 result 변수에 저장합니다.
+            kalt.total.value = total;
+            kalt.display.value = total;
+        }    
+    }
+
+    function clean(){
+    	if(flag == true) { //0이 없는 상태, 디버깅 필요,  5/23 18:44  // 자릿수 제한 - 19 
+        	flag = false;  // 찍어서 0이 있는 상태면 값을 0으로 초기화!
+            kalt.total.value = "0";
+            kalt.display.value = "0"
+        }
+        //kalt.total.value = "0";
+    }
+
+    function plminus(){
+    	if(kalt.display.value.length < 19) {  // 자릿수 제한 - 19 
+        	kalt.display.value = -1* kalt.display.value;
+            kalt.total.value = kalt.display.value;
+        }    
+    }
+
+    function root() {
+    	if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+    		kalt.display.value = Math.sqrt(kalt.display.value);
+            kalt.total.value = kalt.display.value;
+        }    
+    }
+
+    function jegob() {
+    	if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+        	kalt.display.value = Math.pow(kalt.display.value,2);
+            kalt.total.value = kalt.display.value;
+        }    
+    }
+
+    function boon(total) {
+    	if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+        	kalt.display.value = 1/kalt.display.value;
+            kalt.total.value = kalt.display.value;
+        }    
+    }
+
+	function backDo() {
+        if(kalt.display.value.length < 19) { // 자릿수 제한 - 19 
+         kalt.display.value = kalt.display.value.substring(0, kalt.display.value.length-1);
+           // substring 으로 0부터 value 길이에서 -1 한 만큼의 길이를 출력한다
+         }
+         if(kalt.display.value.length == 0){
+        	clean();
+         }
+    }
+
+    function pactorial() {
+        let result = 1;
+        for(let i=kalt.total.value; i>=1; i--) { 
+            result = result * i;
+            kalt.total.value = result;
+        }
+        return result;
+    }
+
+    // 자릿 수 제한 두기
+    //kalt.total.value.length로 두기! 
+
+     function tan(total) {
+        if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+        	kalt.total.value = Math.tan((kalt.total.value * 3.141592) / 180);
+        }
+     }
+     
+     function sin(total) {
+     	if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+       		kalt.total.value = Math.sin((kalt.total.value * 3.141592) / 180);
+        }    
+     }
+     
+     function cos(total) {
+       	if(kalt.total.value.length < 19) {	// 자릿수 제한 - 19 
+        	kalt.total.value = Math.cos((kalt.total.value * 3.141592) / 180);
+        }    
+     }
+     
+     function abs(total) {
+       if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+       		kalt.total.value = Math.abs(kalt.total.value);
+       }     
+     }
+     function tenpow(total){
+         if(kalt.total.value.length < 19) { // 자릿수 제한 - 19 
+         	kalt.total.value = Math.pow(10,kalt.total.value);
+         }   
+     }
+
+</script>
+</head>
+<form name = "kalt"> 
+<!-- form 태그는 입력 양식에 사용,  input 데이터를 받아 결과 값 낼때 -->
+<body>
+<table>
+	<tr>
+        <td>
+          <input type="text" name = "display" id="display" value = "0"  style ="font-size:30px; font-weight:bold;"><span>
+        </td>
+    </tr>
+	<tr>
+    	<td>
+             <input type = 'text' name = 'total' id='total' value = "0"  style ="font-size:30px; font-weight:bold;" >
+        </td>
+    </tr>
+    <tr>	
+    	<td>       
+            <input type = 'button' style="width:38pt;height:25pt;" value = 'C' onclick = "clean()">
+            <input type = "button" style="width:38pt;height:25pt;" value = "back" onclick = "backDo()">
+            <input type = "button" style="width:38pt;height:25pt;" value = "tan" onclick = "tan(total)">
+            <input type = "button" style="width:38pt;height:25pt;" value = "sin" onclick = "sin(total)">
+            <input type = "button" style="width:38pt;height:25pt;" value = "cos" onclick = "cos(total)">
+            <input type = "button" style="width:38pt;height:25pt;" value = "abs" onclick = "abs(total)">
+        </td>
+    </tr>
+    <tr>	
+    	<td>
+        	<input type = 'button' style="width:45pt;height:45pt;" value = '1/n' onclick = "boon(total)">
+            <input type = 'button' style="width:45pt;height:45pt;" value = 'x²' onclick = "jegob(total)">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '√' onclick = "root(total)">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '/' onclick = "add('/')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '10n' onclick = "tenpow(total)">
+            <input type = 'button' style="width:38pt;height:25pt;" value = '!' onclick = "pactorial()">
+        </td>
+    </tr>
+    <tr>	
+    	<td>
+        	<input type = 'button' style="width:45pt;height:45pt;" value = "7" onclick = "add('7')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "8" onclick = "add('8')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "9" onclick = "add('9')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '*' onclick = "add('*')">
+        </td>
+    </tr>
+     <tr>	
+    	<td>        	
+            <input type = 'button' style="width:45pt;height:45pt;" value = "4" onclick = "add('4')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "5" onclick = "add('5')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "6" onclick = "add('6')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '-' onclick = "add('-')">
+        </td>
+    </tr>
+    <tr>	
+    	<td>        	
+            <input type = 'button' style="width:45pt;height:45pt;" value = "1" onclick = "add('1')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "2" onclick = "add('2')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "3" onclick = "add('3')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '+' onclick = "add('+')">
+        </td>
+    </tr>
+    <tr>	
+    	<td>
+        	<input type = 'button' style="width:45pt;height:45pt;" value = '+/-' onclick = "plminus(total)">
+            <input type = 'button' style="width:45pt;height:45pt;" value = "0" onclick = "add(0)">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '.' onclick = "add('.')">
+            <input type = 'button' style="width:45pt;height:45pt;" value = '=' onclick = "merge()">          
+        </td>
+    </tr>
+</table>
+</body>
+</form>
+</html>

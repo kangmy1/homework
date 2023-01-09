@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />    
+  </head>
+
+  <body>
+    <div class="word-ending-container">
+      <div id="prev-word">이전 단어</div>
+      <div class="time-container">시간</div>
+      <div class="input-container">
+        <input id="input-word" type="text" onchange="updateWord(this.value)" />
+      </div>
+    </div>
+    <script>
+      var words = ["자동차", "두꺼비", "전지현", "옷걸이", "칼국수"];
+      var index = Math.floor(Math.random() * 5); // 0 ~ 4
+      var word = words[index];
+      var timeCount = 5;
+      var prevWord = document.querySelector("#prev-word");
+      var time = document.querySelector(".time-container");
+      var input = document.getElementById("input-word");
+
+      prevWord.innerHTML = word;
+      time.innerHTML = timeCount;
+
+      var tick = () => {
+        time.innerHTML = timeCount;
+        if (timeCount === 0) {
+          clearInterval(start);
+          alert("GAME OVER");
+        } else {
+          timeCount -= 1;
+        }
+      };
+      
+      var start = setInterval(tick, 1000); // 1초마다 진행
+
+      var updateWord = value => {
+        var lastPrev = word[word.length - 1];
+        var firstNext = value[0];
+        if (value.length === 3 && lastPrev === firstNext) {
+          word = value;
+          prevWord.innerHTML = word;
+          timeCount = 5;
+          primaryInput();
+        } else {
+          warningInput();
+        }
+        input.value = "";
+      };
+
+    </script>
+  </body>
+</html>

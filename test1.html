@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type = "text/javascript">
+     
+   //   function check_name(){
+   //       // 1.이름 필드에 id 속성으로 접근하여 이름체크
+   //       var cname = document.getElementById("customer_name");
+   //       var hangeul = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; //한글 정규표현식 사용!
+   //       //ㄱ.정규식 사용 시험! - test()
+   //       if(!hangeul.test(cname.value)){
+   //          alert('한글만 입력해 주세요.');
+   //          cname.focus()
+   //       };
+   //       //ㄴ.이름 공백 불가
+   //       if(cname.value ==""){
+   //          alert("공백 불가");
+   //          cname.focus();
+   //       };
+   //      
+   //  };
+
+   // function check_number(){
+   //       // 2. hp 필드에 id 속성으로 접근하여 hp체크
+   //       var cphone = document.getElementById("customer_hp");
+   //       //ㄱ.숫자 입력
+   //       var number = /^[0-9]+$/;
+   //       if(!number.test(cphone.value)){
+   //          alert('숫자만 입력');
+   //          cphone.focus();
+  
+   //       };
+
+   //       //ㄴ.공백 불가
+   //       if(cphone.value==""){
+   //          alert('휴대폰 번호 - 공백 불가');
+   //          cphone.focus();
+
+   //       };
+
+   //       //ㄷ.앞자리(국번) 010,016,017,019
+   //       var headnumber = /^01([0|6|7|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+   //       if(!headnumber.test(cphone.value)){
+   //          alert('국번은 무조건 010,016,017,019 중 하나 여야 합니다.');
+   //          cphone.focus();
+
+   //       };
+
+   //       //ㄹ.11자리
+   //       var number_length = cphone.value.length;
+   //       if(number_length != 11){
+   //          alert("전화번호는 11자리 입력해야 합니다.");
+   //          cphone.focus();
+
+   //       };
+   //  };
+   //
+   //   function check_email(){}
+   //      //3. 이메일 필드에 id 속성으로 접근하여 email 체크를 하세요
+   //      var cemail = document.getElementById("customer_email");
+   //      var add_email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+   //      if(!add_email.test(cemail.value)){
+   //         alert('이메일 양식이 아닙니다.');
+   //         cemail.focus();
+   //      };
+   //
+   //   };
+
+   function check_name(){
+      // 1.이름 필드에 name 속성으로 접근하여 이름체크
+      var cname = document.getElementsByName("customer_info")[0];
+         // 이름 값 공백
+         if(cname.value==""){
+           alert('이름 - 공백 불가');
+           cname.focus();
+         };    
+
+         //ㄱ.정규식 사용 시험!
+         var hangeul = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; //한글 정규표현식 사용!
+         if(!hangeul.test(cname.value)){
+           alert('한글만 입력해 주세요.');
+           cname.focus();
+         };
+
+   };
+
+   function check_number(){
+      //2. hp 필드에 id 속성으로 접근하여 hp체크
+      var cphone = document.getElementsByName("customer_info")[1];
+          //공백 불가
+          if(cphone.value==""){
+           alert('휴대폰 번호 - 공백 불가');
+           cphone.focus();
+          };
+
+         // 숫자만 입력
+         var number = /^[0-9]+$/;
+          if(!number.test(cphone.value)){
+             alert('숫자만 입력');
+             cphone.focus();
+          };
+
+        //ㄷ.앞자리(국번) 010,016,017,019
+        var headnumber = /^01([0|6|7|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+          if(!headnumber.test(cphone.value)){
+             alert('국번은 무조건 010,016,017,019 중 하나 여야 합니다.');
+             cphone.focus();
+          };
+
+        //ㄹ.11자리
+        var number_length = cphone.value.length;
+         if(number_length != 11){
+            alert("전화번호는 11자리 입력해야 합니다.");
+            cphone.focus();
+         };
+   };
+
+   //3. 이메일 필드에 id 속성으로 접근하여 email 체크
+   function check_email(){
+      var cemail = document.getElementsByName("customer_info")[2];
+      // 이메일 정규식 사용 체크
+      var add_email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+         if(!add_email.test(cemail.value)){
+            alert('이메일 양식이 아닙니다.');
+            cemail.focus();
+         }; 
+         
+      cemail.onkeyup = function(){
+      var add_email_keyup = /^[a-zA-Z]([-_.]?[a-zA-Z])*@[a-zA-Z]([-_.]?[a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+       if(add_email_keyup.test(cemailKey.value)){
+          alert('영문,.,@ 만 입력처리 가능!');
+          cemailKey.focus();
+       };
+      };
+
+   };
+
+  </script>
+ </head>
+ <body>
+  
+이름:<input type="text" name="customer_info" id="customer_name" onblur="return check_name();"><br>
+hp:<input type="text" name="customer_info" id="customer_hp" onblur="return check_number();"><br>
+이메일:<input type="text" name="customer_info" id="customer_email" onblur = "return check_email();"><br><br>
+
+체크
+
+</body>
+</html>
